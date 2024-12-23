@@ -1,9 +1,14 @@
 import { KeyboardView } from '@src/components/base/KeyboardView';
 import React, { useState } from 'react';
-import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
+} from 'react-native';
 import Colors from '@src/styles/Colors';
 import Navigation from '@src/navigation/navigation';
-import {Screens} from '@src/navigation/const';
 
 const ContactsScreen = (): React.JSX.Element => {
     const [phone, setPhone] = useState('');
@@ -26,7 +31,7 @@ const ContactsScreen = (): React.JSX.Element => {
                         <Text style={styles.label}>Phone number</Text>
                         <TextInput
                             style={styles.input}
-                            placeholderTextColor={Colors.input.placeholderColor}
+                            placeholderTextColor={Colors.textBlack}
                             placeholder={'Phone number'}
                             value={phone}
                             keyboardType={'phone-pad'}
@@ -37,7 +42,7 @@ const ContactsScreen = (): React.JSX.Element => {
                         <Text style={styles.label}>Address</Text>
                         <TextInput
                             style={styles.input}
-                            placeholderTextColor={Colors.input.placeholderColor}
+                            placeholderTextColor={Colors.textBlack}
                             placeholder={'Address'}
                             value={address}
                             onChangeText={setAddress}
@@ -47,7 +52,7 @@ const ContactsScreen = (): React.JSX.Element => {
                         <Text style={styles.label}>Comments</Text>
                         <TextInput
                             style={styles.input}
-                            placeholderTextColor={Colors.input.placeholderColor}
+                            placeholderTextColor={Colors.textBlack}
                             placeholder={'Comments'}
                             value={comment}
                             onChangeText={setComment}
@@ -57,7 +62,7 @@ const ContactsScreen = (): React.JSX.Element => {
                         <Text style={styles.label}>Index</Text>
                         <TextInput
                             style={styles.input}
-                            placeholderTextColor={Colors.input.placeholderColor}
+                            placeholderTextColor={Colors.textBlack}
                             placeholder={'Index'}
                             value={taskIndex}
                             onChangeText={setTaskIndex}
@@ -65,62 +70,35 @@ const ContactsScreen = (): React.JSX.Element => {
                     </View>
                 </View>
             </KeyboardView>
-            <View
-                style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    paddingHorizontal: 16,
-                    position: 'absolute',
-                    bottom: 40,
-                }}
-            >
+
+            <View style={{
+                position: 'absolute',
+                bottom: 40,
+                width: '100%',
+                paddingHorizontal: 20,
+            }}>
                 <TouchableOpacity
-                    activeOpacity={0.8}
-                    onPress={() => {
-                        Navigation.pop();
-                    }}
-                    style={{
-                        width: '100%',
-                        flex: 1,
-                        height: 50,
-                        marginRight: 12,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: Colors.button.buttonGreen,
-                        borderRadius: 12,
-                    }}
+                  activeOpacity={0.8}
+                  onPress={() => {
+                      Navigation.pop();
+                  }}
+                  style={{
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      backgroundColor: Colors.button.buttonGreen,
+                      borderRadius: 30,
+                      paddingVertical: 12,
+                  }}
                 >
                     <Text
-                        style={{
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: '700',
-                        }}
+                      style={{
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: '700',
+                      }}
                     >
-                        Save
+                        Back to menu
                     </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    activeOpacity={0.7}
-                    style={{
-                        width: 50,
-                        height: 50,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        borderRadius: 12,
-                        backgroundColor: Colors.white,
-                        borderWidth: 1,
-                        borderColor: Colors.button.buttonGreen,
-                    }}
-                >
-                    <Image
-                        resizeMode="cover"
-                        source={require('@src/assets/img/cart-fill/solar_cart-bold.png')}
-                        style={{
-                            width: 24,
-                            height: 24,
-                        }}
-                    />
                 </TouchableOpacity>
             </View>
         </View>
@@ -137,20 +115,21 @@ const styles = StyleSheet.create({
     label: {
         fontSize: 16,
         fontWeight: '500',
-        color: Colors.textBlack,
+        color: Colors.button.buttonYellow,
         marginBottom: 4,
     },
     input: {
         color: Colors.textBlack,
-        fontSize: 16,
-        fontWeight: '400',
+        fontSize: 20,
+        fontWeight: '600',
         paddingHorizontal: 16,
+        backgroundColor: Colors.button.buttonGreen,
         width: '100%',
-        minHeight: 60,
+        minHeight: 45,
         maxHeight: 300,
         borderWidth: 1,
         borderColor: Colors.input.borderColor,
-        borderRadius: 12,
+        borderRadius: 30,
     },
 });
 export default ContactsScreen;

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import { KeyboardView } from '@src/components/base/KeyboardView';
 import Colors from '@src/styles/Colors';
 import Navigation from '@src/navigation/navigation';
@@ -23,7 +23,7 @@ const ReservationScreen = (): React.JSX.Element => {
                         <Text style={styles.label}>First name</Text>
                         <TextInput
                             style={styles.input}
-                            placeholderTextColor={Colors.input.placeholderColor}
+                            placeholderTextColor={Colors.textBlack}
                             placeholder={'First name'}
                             value={firstName}
                             onChangeText={setFirstName}
@@ -34,7 +34,7 @@ const ReservationScreen = (): React.JSX.Element => {
                         <TextInput
                             style={styles.input}
                             keyboardType={'phone-pad'}
-                            placeholderTextColor={Colors.input.placeholderColor}
+                            placeholderTextColor={Colors.textBlack}
                             placeholder={'Phone Number'}
                             value={phoneNumber}
                             onChangeText={setPhoneNumber}
@@ -44,7 +44,7 @@ const ReservationScreen = (): React.JSX.Element => {
                         <Text style={styles.label}>Table №</Text>
                         <TextInput
                             style={styles.input}
-                            placeholderTextColor={Colors.input.placeholderColor}
+                            placeholderTextColor={Colors.textBlack}
                             placeholder={'Task name'}
                             value={tableName}
                             onChangeText={setTableName}
@@ -61,7 +61,7 @@ const ReservationScreen = (): React.JSX.Element => {
                             <Text style={styles.label}>Time</Text>
                             <TextInput
                                 style={styles.input}
-                                placeholderTextColor={Colors.input.placeholderColor}
+                                placeholderTextColor={Colors.textBlack}
                                 placeholder={'HH.MM'}
                                 value={tableName}
                                 onChangeText={setTableName}
@@ -71,7 +71,7 @@ const ReservationScreen = (): React.JSX.Element => {
                             <Text style={styles.label}>Date</Text>
                             <TextInput
                                 style={styles.input}
-                                placeholderTextColor={Colors.input.placeholderColor}
+                                placeholderTextColor={Colors.textBlack}
                                 placeholder={'DD.MM.YY'}
                                 value={tableName}
                                 onChangeText={setTableName}
@@ -80,61 +80,36 @@ const ReservationScreen = (): React.JSX.Element => {
                     </View>
                 </View>
             </KeyboardView>
-            <View
-                style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    paddingHorizontal: 16,
-                    position: 'absolute',
-                    bottom: 40,
-                }}
+          <View style={{
+            position: 'absolute',
+            bottom: 40,
+            width: '100%',
+            paddingHorizontal: 20,
+          }}>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => {
+                Navigation.navigate(Screens.RESERVATION_SUCCESS);
+              }}
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: Colors.button.buttonGreen,
+                borderRadius: 30,
+                paddingVertical: 12,
+              }}
             >
-                <TouchableOpacity
-                    activeOpacity={0.8}
-                    onPress={() => {
-                        Navigation.navigate(Screens.RESERVATION_SUCCESS);
-                    }}
-                    style={{
-                        width: '100%',
-                        flex: 1,
-                        height: 50,
-                        marginRight: 12,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: Colors.button.buttonGreen,
-                        borderRadius: 12,
-                    }}
-                >
-                    <Text
-                        style={{
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: '700',
-                        }}
-                    >
-                        Reserve
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    activeOpacity={0.7}
-                    style={{
-                        width: 50,
-                        height: 50,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        borderRadius: 12,
-                        backgroundColor: Colors.white,
-                        borderWidth: 1,
-                        borderColor: Colors.button.buttonGreen,
-                    }}
-                >
-                    <Image
-                        resizeMode="cover"
-                        source={require('@src/assets/img/cart-fill/solar_cart-bold.png')}
-                        style={styles.cartIcon}
-                    />
-                </TouchableOpacity>
-            </View>
+              <Text
+                style={{
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: '700',
+                }}
+              >
+                Reservation
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
     );
 };
@@ -155,21 +130,23 @@ const styles = StyleSheet.create({
         marginBottom: 16,
     },
     label: {
-        fontSize: 16,
-        fontWeight: '500',
-        color: Colors.textBlack,
-        marginBottom: 4,
+      fontSize: 20,
+      fontWeight: '600',
+      color: Colors.button.buttonYellow,
+      marginBottom: 4,
     },
     input: {
-        color: Colors.textBlack,
-        fontSize: 16,
-        fontWeight: '400',
-        paddingHorizontal: 16,
-        width: '100%',
-        height: 60,
-        borderWidth: 1,
-        borderColor: Colors.input.borderColor,
-        borderRadius: 12,
+      color: Colors.textBlack,
+      fontSize: 20,
+      fontWeight: '600',
+      paddingHorizontal: 16,
+      backgroundColor: Colors.button.buttonGreen,
+      width: '100%',
+      minHeight: 45,
+      maxHeight: 300,
+      borderWidth: 1,
+      borderColor: Colors.input.borderColor,
+      borderRadius: 30,
     },
 });
 export default ReservationScreen;

@@ -3,39 +3,33 @@ import {Screens} from '@src/navigation/const';
 type MenuItem = {
   id: string; // Уникальный идентификатор
   title: string; // Заголовок
-  icon: ReturnType<typeof require>; // Иконка с использованием require()
   route: string; // Путь для навигации
 };
 
 export const menuData: MenuItem[] = [
   {
     id: '1',
-    title: 'Shop',
-    icon: require('@src/assets/img/shop-icon/solar_shop-bold.png'),
+    title: 'MENU',
     route: Screens.SHOP,
   },
   {
     id: '2',
-    title: 'Reservation',
-    icon: require('@src/assets/img/reservation/ic_baseline-table-bar.png'),
+    title: 'RESERVATION',
     route: Screens.RESERVATION,
   },
   {
     id: '3',
-    title: 'Contacts',
-    icon: require('@src/assets/img/contacts/iconamoon_phone-fill.png'),
-    route: Screens.CONTACTS,
-  },
-  {
-    id: '4',
-    title: 'Restaurant events',
-    icon: require('@src/assets/img/events/clarity_event-solid.png'),
+    title: 'EVENTS',
     route: Screens.EVENTS,
   },
   {
+    id: '4',
+    title: 'CONTACTS',
+    route: Screens.CONTACTS,
+  },
+  {
     id: '5',
-    title: 'Bonuses',
-    icon: require('@src/assets/img/bonuses/tabler_gift-filled.png'),
+    title: 'BONUSES',
     route: Screens.BONUSES,
   },
 ];
@@ -43,135 +37,112 @@ export const menuData: MenuItem[] = [
 export type Product = {
   id: number;
   title: string;
-  description: string;
   image: ReturnType<typeof require>;
   price: number;
   quantity?: number;
-  oldPrice?: number;
-  calories: string;
-  weight: string;
 };
 
 export const breakfasts: Product[] = [
   {
     id: 1,
-    title: "Rice porridge with lingonberries",
-    description: "320 Kcal, 131 g",
-    image: require('@src/assets/img/product-image/image.png'),
-    price: 29,
-    oldPrice: 35,
-    calories: "320 Kcal",
-    weight: "131 g",
+    title: "Tom yam with seafood",
+    image: require('@src/assets/img-yellow/dishes/dishes-1/f6adecbfbf8f11ef9bb0a2566b9d985b_11.png'),
+    price: 7.99,
   },
   {
     id: 2,
-    title: "Semolina cake with cherry jam",
-    description: "282 Kcal, 224 g",
-    image: require('@src/assets/img/image-b-2/image.png'),
-    price: 29,
-    oldPrice: 35,
-    calories: "282 Kcal",
-    weight: "224 g",
+    title: "Chicken pasta with pesto",
+    image: require('@src/assets/img-yellow/dishes/dishes-2/8f66c715bf9211efa1483ef94bc9e66e_11.png'),
+    price: 4.99,
   },
   {
     id: 3,
-    title: "Cheese pancakes with strawberry jam",
-    description: "291 Kcal, 130 g",
-    image: require('@src/assets/img/image-b-3/image.png'),
-    price: 29,
-    oldPrice: 35,
-    calories: "291 Kcal",
-    weight: "130 g",
+    title: "Grilled ribs with pesto",
+    image: require('@src/assets/img-yellow/dishes/dishes-3/68af694fbf9211ef9a5fc29ccd14b578_11.png'),
+    price: 7.55,
   },
   {
     id: 4,
-    title: "Croissant with ham and cheese",
-    description: "433 Kcal, 110 g",
-    image: require('@src/assets/img/image-b-4/image.png'),
-    price: 29,
-    oldPrice: 35,
-    calories: "433 Kcal",
-    weight: "110 g",
+    title: "Risoni with mushrooms",
+    image: require('@src/assets/img-yellow/dishes/dishes-4/8bc63f5ac08211ef86f52652804b2160_11.png'),
+    price: 4.39,
+  },
+  {
+    id: 14,
+    title: "Filet mignon with yams",
+    image: require('@src/assets/img-yellow/dishes/dishes-5/0d82358dc08311efad04e6a64aa512b4_11.png'),
+    price: 12.99,
+  },
+  {
+    id: 224,
+    title: "Ramen with duck",
+    image: require('@src/assets/img-yellow/dishes/dishes-6/779a9095c08311efab810e7f2f591fdc_11.png'),
+    price: 7.33,
   },
 ];
 
 export const lunches: Product[] = [
   {
-    id: 5,
-    title: "Grilled chicken with vegetables",
-    description: "520 Kcal, 300 g",
-    image: require('@src/assets/img/image-l-1/image.png'),
-    price: 49,
-    oldPrice: 55,
-    calories: "520 Kcal",
-    weight: "300 g",
+    id: 21,
+    title: "Honeydew \n" +
+      "cake",
+    image: require('@src/assets/img-yellow/desert/desert-1/desert-1.png'),
+    price: 7.99,
   },
   {
-    id: 6,
-    title: "Vegetable salad with dressing",
-    description: "150 Kcal, 200 g",
-    image: require('@src/assets/img/image-l-2/image.png'),
-    price: 25,
-    calories: "150 Kcal",
-    weight: "200 g",
+    id: 22,
+    title: "Sorbet",
+    image: require('@src/assets/img-yellow/desert/desert-2/desert-2.png'),
+    price: 4.99,
   },
   {
-    id: 26,
-    title: "Vegetable salad with dressing",
-    description: "150 Kcal, 200 g",
-    image: require('@src/assets/img/image-l-3/image.png'),
-    price: 25,
-    calories: "150 Kcal",
-    weight: "200 g",
+    id: 23,
+    title: "Napoleon \n" +
+      "cake",
+    image: require('@src/assets/img-yellow/desert/desert-3/desert-3.png'),
+    price: 7.55,
   },
   {
-    id: 36,
-    title: "Vegetable salad with dressing",
-    description: "150 Kcal, 200 g",
-    image: require('@src/assets/img/image-l-4/image.png'),
-    price: 25,
-    calories: "150 Kcal",
-    weight: "200 g",
+    id: 24,
+    title: "Chocolate Pancake Cake",
+    image: require('@src/assets/img-yellow/desert/desert-4/desert-4.png'),
+    price: 4.39,
+  },
+  {
+    id: 214,
+    title: "Filet mignon \n" +
+      "with yams",
+    image: require('@src/assets/img-yellow/desert/desert-5/desert-5.png'),
+    price: 12.99,
   },
 ];
 
 export const dinners: Product[] = [
   {
     id: 7,
-    title: "Beef steak with rice with potatoes",
-    description: "650 Kcal, 350 g",
-    image: require('@src/assets/img/image-l-2/image.png'),
-    price: 59,
-    oldPrice: 65,
-    calories: "650 Kcal",
-    weight: "350 g",
+    title: "Sea buckthorn yuzu tea",
+    image: require('@src/assets/img-yellow/drinks/drinks-1/drinks-1.png'),
+    price: 7.99,
   },
   {
     id: 8,
-    title: "Fish fillet with rice with potatoes",
-    description: "430 Kcal, 300 g",
-    image: require('@src/assets/img/image-l-4/image.png'),
-    price: 45,
-    calories: "430 Kcal",
-    weight: "300 g",
+    title: "Raspberry \n" +
+      "smoothie",
+    image: require('@src/assets/img-yellow/drinks/drinks-2/drinks-2.png'),
+    price: 7.99,
   },
   {
     id: 18,
-    title: "Fish fillet with rice with potatoes",
-    description: "430 Kcal, 300 g",
-    image: require('@src/assets/img/image-l-3/image.png'),
-    price: 45,
-    calories: "330 Kcal",
-    weight: "240 g",
+    title: "Banana \n" +
+      "smoothie",
+    image: require('@src/assets/img-yellow/drinks/drinks-3/drinks-3.png'),
+    price: 7.99,
   },
   {
     id: 38,
-    title: "Chopped beef in creamy sauce with spinach and spaghetti",
-    description: "430 Kcal, 300 g",
-    image: require('@src/assets/img/image-l-1/image.png'),
-    price: 29,
-    calories: "420 Kcal",
-    weight: "250 g",
+    title: "Energetic",
+    image: require('@src/assets/img-yellow/drinks/drinks-4/drinks-4.png'),
+    price: 7.99,
   },
 ];
 
@@ -189,56 +160,56 @@ export type EventType = {
 export const events: EventType[] = [
   {
     id: 1,
-    title: 'Dinner Under the Stars',
+    title: 'Live music',
     description:
         'Enjoy the atmosphere of a romantic dinner on the restaurant terrace under the open sky, where a special menu and pleasant live music await you.',
     date: '23rd December 2024',
-    time: '6:00 PM – 11:00 PM',
-    image: require('@src/assets/img/event-1/event-1.png')
+    time: '31.12.24, 10:00 - 00:00',
+    image: require('@src/assets/img-yellow/events/events-1/image.png')
   },
   {
     id: 2,
-    title: 'Gastronomic Masterclass',
+    title: 'Cooking with the chef',
     description:
         'Join our chef for an exciting masterclass where you will learn to cook signature dishes and uncover the secrets of culinary art.',
     date: '23rd December 2024',
-    time: '6:00 PM – 11:00 PM',
-    image: require('@src/assets/img/event-2/event-2.png')
+    time: '31.12.24, 10:00 - 00:00',
+    image: require('@src/assets/img-yellow/events/events-2/image.png')
   },
   {
     id: 3,
-    title: 'Wine and Cheese Evening',
+    title: 'Preparing for Christmas',
     description:
         'Discover the perfect pairing of wines and cheeses at our gastronomic evening, where a sommelier will share insights on the best combinations and conduct a tasting.',
     date: '23rd December 2024',
-    time: '6:00 PM – 11:00 PM',
-    image: require('@src/assets/img/event-3/event-3.png')
+    time: '31.12.24, 10:00 - 00:00',
+    image: require('@src/assets/img-yellow/events/events-3/image.png')
   },
   {
     id: 4,
-    title: 'Theme of the Night: Italian Celebration',
+    title: 'Live music',
     description:
         'Immerse yourself in the atmosphere of Italy at our themed evening with live music, traditional dishes, and dances that will transport you to the heart of Rome.',
     date: '23rd December 2024',
-    time: '6:00 PM – 11:00 PM',
-    image: require('@src/assets/img/event-1/event-1.png')
+    time: 'Every Saturday, 15:00 - 19:00',
+    image: require('@src/assets/img-yellow/events/events-1/image.png')
   },
   {
     id: 5,
-    title: 'Theme of the Night: Italian Celebration',
+    title: 'Cooking with the chef',
     description:
         'Immerse yourself in the atmosphere of Italy at our themed evening with live music, traditional dishes, and dances that will transport you to the heart of Rome.',
     date: '23rd December 2024',
-    time: '6:00 PM – 11:00 PM',
-    image: require('@src/assets/img/event-2/event-2.png')
+    time: 'Every Saturday, 15:00 - 19:00',
+    image: require('@src/assets/img-yellow/events/events-2/image.png')
   },
   {
     id: 6,
-    title: 'Theme of the Night: Italian Celebration',
+    title: 'Preparing for Christmas',
     description:
         'Immerse yourself in the atmosphere of Italy at our themed evening with live music, traditional dishes, and dances that will transport you to the heart of Rome.',
     date: '23rd December 2024',
-    time: '6:00 PM – 11:00 PM',
-    image: require('@src/assets/img/event-3/event-3.png')
+    time: 'Every Saturday, 15:00 - 19:00',
+    image: require('@src/assets/img-yellow/events/events-3/image.png')
   },
 ];

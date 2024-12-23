@@ -1,4 +1,4 @@
-import React, { type FC } from 'react';
+import React from 'react';
 import {
     FlatList,
     StyleSheet,
@@ -10,9 +10,10 @@ import {
 import { menuData } from '@src/utils/common';
 import Colors from '@src/styles/Colors';
 import Navigation from '@src/navigation/navigation';
-import {Screens} from '@src/navigation/const';
-import {shopSelector} from '@src/store/shop/shopSlice';
-import {useSelector} from 'react-redux';
+import { Screens } from '@src/navigation/const';
+import { shopSelector } from '@src/store/shop/shopSlice';
+import { useSelector } from 'react-redux';
+import NumberFlow from 'rn-number-flow';
 
 const MainScreen = (): React.JSX.Element => {
     const { totalCount } = useSelector(shopSelector);
@@ -25,9 +26,12 @@ const MainScreen = (): React.JSX.Element => {
     };
 
     const renderItem = ({ item }: { item: (typeof menuData)[0] }) => (
-        <TouchableOpacity onPress={() => handleNavigate(item.route)} activeOpacity={0.7} style={styles.itemContainer}>
+        <TouchableOpacity
+            onPress={() => handleNavigate(item.route)}
+            activeOpacity={0.7}
+            style={styles.itemContainer}
+        >
             <Text style={styles.title}>{item.title}</Text>
-            <Image source={item.icon} style={styles.icon} />
         </TouchableOpacity>
     );
     return (
@@ -35,65 +39,76 @@ const MainScreen = (): React.JSX.Element => {
             <FlatList
                 data={menuData}
                 renderItem={renderItem}
+                showsVerticalScrollIndicator={false}
                 keyExtractor={(item) => item.id}
             />
-            <TouchableOpacity activeOpacity={0.7} onPress={handleNavigateCart} style={styles.cartButton}>
-                <Image
-                    resizeMode="cover"
-                    source={require('@src/assets/img/cart-icon/solar_cart-bold.png')}
-                    style={styles.cartIcon}
-                />
-                <Text style={styles.cartText}>{totalCount} $</Text>
-            </TouchableOpacity>
+            <View
+                style={{
+                    alignItems: 'center',
+                    width: '100%',
+                }}
+            >
+                <TouchableOpacity
+                    activeOpacity={0.7}
+                    onPress={handleNavigateCart}
+                    style={styles.cartButton}
+                >
+                    <Image
+                        resizeMode="cover"
+                        source={require('@src/assets/img-yellow/cart-black/bag-twoline.png')}
+                        style={[styles.cartIcon, totalCount> 0 && { marginRight: 12 }]}
+                    />
+                    {totalCount > 0 && (
+                        <NumberFlow
+                            style={{
+                                color: Colors.textBlack,
+                                fontSize: 20,
+                                fontWeight: '700',
+                            }}
+                            value={`${totalCount.toFixed(2)} $`}
+                        />
+                    )}
+                </TouchableOpacity>
+            </View>
         </View>
     );
 };
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingHorizontal: 16,
+        paddingTop: 33,
         backgroundColor: Colors.white,
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 16,
     },
     itemContainer: {
-        width: '100%',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
         alignItems: 'center',
         padding: 22,
-        marginVertical: 8,
-        borderWidth: 1,
-        borderColor: Colors.input.borderColor,
-        backgroundColor: Colors.white,
-        borderRadius: 16,
+        marginBottom: 33,
+        borderWidth: 2,
+        borderColor: Colors.button.buttonGreen,
+        borderRadius: 30,
     },
     title: {
         fontSize: 16,
         fontWeight: 'bold',
-    },
-    icon: {
-        width: 44,
-        height: 44,
-        resizeMode: 'cover',
+        color: Colors.button.buttonGreen,
     },
     cartButton: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 16,
-        width: 180,
-        marginBottom: 20,
+        paddingHorizontal: 25,
+        paddingVertical: 11,
+        marginBottom: 40,
         borderRadius: 16,
         backgroundColor: Colors.button.buttonGreen,
     },
     cartIcon: {
-        width: 24,
-        height: 24,
-        marginRight: 8,
+        width: 45,
+        height: 45,
     },
     cartText: {
-        color: 'white',
+        color: Colors.textBlack,
         fontWeight: 'bold',
     },
 });
