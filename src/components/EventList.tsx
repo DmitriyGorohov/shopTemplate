@@ -6,15 +6,16 @@ import {
     StyleSheet,
     Image,
     TouchableOpacity,
+    Dimensions,
 } from 'react-native';
 import Colors from '@src/styles/Colors';
-import {events, EventType} from '@src/utils/common';
+import { events, EventType } from '@src/utils/common';
 import Navigation from '@src/navigation/navigation';
-import {Screens} from '@src/navigation/const';
+import { Screens } from '@src/navigation/const';
 
 const EventsList = () => {
     const onPress = (item: EventType) => {
-        Navigation.navigate(Screens.EVENTS_CONTENT, { item })
+        Navigation.navigate(Screens.EVENTS_CONTENT, { item });
     };
 
     return (
@@ -23,22 +24,27 @@ const EventsList = () => {
                 data={events}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
-                    <TouchableOpacity activeOpacity={0.8} onPress={() => onPress(item)} style={styles.eventCard}>
+                    <TouchableOpacity
+                        activeOpacity={0.9}
+                        onPress={() => onPress(item)}
+                        style={styles.eventCard}
+                    >
+                        <Image
+                            style={{
+                                width: Dimensions.get('window').width,
+                            }}
+                            resizeMode={'cover'}
+                            source={item.image}
+                        />
                         <View style={styles.textContainer}>
                             <Text style={styles.title}>{item.title}</Text>
-                            <Text numberOfLines={3} style={styles.description}>
-                                {item.description}
-                            </Text>
                             <View style={styles.footer}>
-                                <Text style={styles.date}>{item.date}</Text>
+                                <Image
+                                    source={require('@src/assets/img-yellow/date-yellow/date-yellow.png')}
+                                />
                                 <Text style={styles.time}>{item.time}</Text>
                             </View>
                         </View>
-                        <TouchableOpacity style={styles.arrowButton}>
-                            <Image
-                                source={require('../assets/img/arrow-right/weui_arrow-filled.png')}
-                            />
-                        </TouchableOpacity>
                     </TouchableOpacity>
                 )}
                 showsVerticalScrollIndicator={false}
@@ -55,41 +61,42 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
     },
     eventCard: {
-        flexDirection: 'row',
         alignItems: 'center',
+        width: '100%',
+        overflow: 'hidden',
         backgroundColor: Colors.white,
-        marginBottom: 16,
-        borderWidth: 1,
-        borderColor: Colors.input.borderColor,
+        marginBottom: 35,
         borderRadius: 12,
-        padding: 16,
+        paddingHorizontal: 16,
     },
     textContainer: {
-        flex: 1,
+        width: '100%',
+        alignItems: 'flex-start',
+        paddingHorizontal: 20,
+        paddingVertical: 11,
+        borderWidth: 1,
+        borderColor: Colors.button.buttonGreen,
+        borderRadius: 20,
+        backgroundColor: Colors.white,
+        zIndex: 999,
+        position: 'absolute',
+        bottom: 10,
     },
     title: {
-        fontSize: 16,
-        fontWeight: '700',
-        color: Colors.textBlack,
+        fontSize: 12,
+        fontWeight: '300',
+        color: Colors.button.buttonGreen,
         marginBottom: 8,
-    },
-    description: {
-        fontSize: 14,
-        color: Colors.textGray,
-        marginBottom: 12,
     },
     footer: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
         alignItems: 'center',
     },
-    date: {
-        fontSize: 13,
-        color: Colors.textGray,
-    },
     time: {
-        fontSize: 13,
-        color: Colors.textGray,
+        fontSize: 10,
+        marginLeft: 4,
+        color: Colors.button.buttonGreen,
     },
     arrowButton: {
         alignSelf: 'flex-start',

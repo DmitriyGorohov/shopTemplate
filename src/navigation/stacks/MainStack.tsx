@@ -25,12 +25,15 @@ const MainStack = (): React.JSX.Element => {
                 options={{
                     cardStyleInterpolator:
                         CardStyleInterpolators.forHorizontalIOS,
-                    headerTitle: 'Logo or name',
+                    headerTitle: 'Restaurant',
                     headerTitleAlign: 'center',
                     headerBackTitle: 'Back',
                     headerTintColor: Colors.button.buttonGreen,
                     headerBackTitleStyle: {
                         color: Colors.button.buttonGreen,
+                    },
+                    headerStyle: {
+                        backgroundColor: Colors.white,
                     },
                 }}
                 name={Screens.MAIN_SCREEN}
@@ -40,14 +43,7 @@ const MainStack = (): React.JSX.Element => {
                 options={{
                     cardStyleInterpolator:
                         CardStyleInterpolators.forHorizontalIOS,
-                    headerTitle: 'Shop',
-                    headerTitleAlign: 'center',
-                    headerBackTitle: 'Back',
-                    headerTintColor: Colors.button.buttonGreen,
-                    headerBackTitleVisible: true,
-                    headerBackTitleStyle: {
-                        color: Colors.button.buttonGreen,
-                    },
+                    headerShown: false,
                 }}
                 name={Screens.SHOP}
                 component={ShopScreen}
@@ -64,6 +60,9 @@ const MainStack = (): React.JSX.Element => {
                     headerBackTitleStyle: {
                         color: Colors.button.buttonGreen,
                     },
+                    headerStyle: {
+                        backgroundColor: Colors.white,
+                    },
                 }}
                 name={Screens.CONTACTS}
                 component={ContactsScreen}
@@ -72,13 +71,16 @@ const MainStack = (): React.JSX.Element => {
                 options={{
                     cardStyleInterpolator:
                         CardStyleInterpolators.forHorizontalIOS,
-                    headerTitle: 'Reservation events',
+                    headerTitle: 'Events',
                     headerBackTitle: 'Back',
                     headerTitleAlign: 'center',
                     headerTintColor: Colors.button.buttonGreen,
                     headerBackTitleVisible: true,
                     headerBackTitleStyle: {
                         color: Colors.button.buttonGreen,
+                    },
+                    headerStyle: {
+                        backgroundColor: Colors.white,
                     },
                 }}
                 name={Screens.EVENTS}
@@ -96,6 +98,9 @@ const MainStack = (): React.JSX.Element => {
                     headerBackTitleStyle: {
                         color: Colors.button.buttonGreen,
                     },
+                    headerStyle: {
+                        backgroundColor: Colors.white,
+                    },
                 }}
                 name={Screens.RESERVATION}
                 component={ReservationScreen}
@@ -108,7 +113,7 @@ const MainStack = (): React.JSX.Element => {
                     headerTitleAlign: 'center',
                     headerBackTitle: 'Back',
                     headerStyle: {
-                        borderBottomColor: 'transparent',
+                        backgroundColor: Colors.white,
                     },
                     headerTintColor: Colors.button.buttonGreen,
                     headerBackTitleVisible: true,
@@ -127,6 +132,9 @@ const MainStack = (): React.JSX.Element => {
                     headerBackTitle: 'Back',
                     headerTitleAlign: 'center',
                     headerTitle: '',
+                    headerStyle: {
+                        backgroundColor: Colors.white,
+                    },
                     headerTintColor: Colors.button.buttonGreen,
                     headerBackTitleStyle: {
                         color: Colors.button.buttonGreen,
@@ -147,6 +155,9 @@ const MainStack = (): React.JSX.Element => {
                     headerBackTitleStyle: {
                         color: Colors.button.buttonGreen,
                     },
+                    headerStyle: {
+                        backgroundColor: Colors.white,
+                    },
                 }}
                 name={Screens.RESERVATION_SUCCESS}
                 component={ReservationSuccessScreen}
@@ -163,6 +174,9 @@ const MainStack = (): React.JSX.Element => {
                     headerBackTitleStyle: {
                         color: Colors.button.buttonGreen,
                     },
+                    headerStyle: {
+                        backgroundColor: Colors.white,
+                    },
                 }}
                 name={Screens.CART_SUCCESS}
                 component={OrderScreen}
@@ -171,14 +185,7 @@ const MainStack = (): React.JSX.Element => {
                 options={{
                     cardStyleInterpolator:
                         CardStyleInterpolators.forHorizontalIOS,
-                    headerBackTitleVisible: true,
-                    headerBackTitle: 'Back',
-                    headerTitleAlign: 'center',
-                    headerTitle: '',
-                    headerTintColor: Colors.button.buttonGreen,
-                    headerBackTitleStyle: {
-                        color: Colors.button.buttonGreen,
-                    },
+                    headerShown: false,
                 }}
                 name={Screens.EVENTS_CONTENT}
                 component={EventContentScreen}

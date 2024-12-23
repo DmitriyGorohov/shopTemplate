@@ -16,6 +16,7 @@ import {
     shopSelector,
 } from '@src/store/shop/shopSlice';
 import Counter from '@src/components/Counter';
+import Animated, { LinearTransition } from 'react-native-reanimated';
 
 const ProductList = ({ data }: { data: Product[] }) => {
     const dispatch = useDispatch();
@@ -25,64 +26,94 @@ const ProductList = ({ data }: { data: Product[] }) => {
         <FlatList
             data={data}
             numColumns={2}
-            bounces={false}
             contentContainerStyle={styles.contentContainerStyle}
             showsVerticalScrollIndicator={false}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
                 <View style={styles.product}>
-                    <Image
-                        resizeMode="cover"
-                        source={item.image}
-                        style={styles.image}
-                    />
-                    <View
-                        style={{
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            marginBottom: 4,
-                        }}
-                    >
-                        <Text style={styles.price}>${item.price}</Text>
-                        {item.oldPrice && (
-                            <Text style={styles.oldPrice}>
-                                ${item.oldPrice}
-                            </Text>
-                        )}
+                    <View>
+                        <Image
+                            resizeMode="stretch"
+                            source={item.image}
+                            style={styles.image}
+                        />
+
+                        <Animated.View
+                            layout={LinearTransition.springify()}
+                            style={{
+                                position: 'absolute',
+                                top: 10,
+                                right: 10,
+                                width: !itemBasket.some(
+                                    (basketItem) =>
+                                        basketItem.product.id === item.id
+                                )
+                                    ? 30
+                                    : 120,
+                                height: 30,
+                                backgroundColor: Colors.button.buttonGreen,
+                                borderRadius: 30 / 2,
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            {itemBasket.some(
+                                (basketItem) =>
+                                    basketItem.product.id === item.id
+                            ) ? (
+                                <Counter
+                                    quantity={
+                                        itemBasket.find(
+                                            (basketItem) =>
+                                                basketItem.product.id ===
+                                                item.id
+                                        )?.quantity
+                                    }
+                                    onIncrement={() =>
+                                        dispatch(addProductToBasket(item))
+                                    }
+                                    onDecrement={() =>
+                                        dispatch(
+                                            decreaseProductQuantity(item.id)
+                                        )
+                                    }
+                                />
+                            ) : (
+                                <TouchableOpacity
+                                    onPress={() =>
+                                        dispatch(addProductToBasket(item))
+                                    }
+                                    style={{
+                                        position: 'absolute',
+                                        top: 0,
+                                        right: 0,
+                                        width: 30,
+                                        height: 30,
+                                        backgroundColor:
+                                            Colors.button.buttonGreen,
+                                        borderRadius: 30 / 2,
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                    }}
+                                >
+                                    <Image
+                                        source={require('@src/assets/img-yellow/cart-black/bag-twoline.png')}
+                                        resizeMode="cover"
+                                        style={{
+                                            width: 20,
+                                            height: 20,
+                                        }}
+                                    />
+                                </TouchableOpacity>
+                            )}
+                        </Animated.View>
                     </View>
-                    <Text style={styles.title}>{item.title}</Text>
-                    <Text style={styles.description}>{item.description}</Text>
-                    <View style={styles.actionsContainer}>
-                        {itemBasket.some(
-                            (basketItem) => basketItem.product.id === item.id
-                        ) ? (
-                            <Counter
-                                quantity={
-                                    itemBasket.find(
-                                        (basketItem) =>
-                                            basketItem.product.id === item.id
-                                    )?.quantity
-                                }
-                                onIncrement={() =>
-                                    dispatch(addProductToBasket(item))
-                                }
-                                onDecrement={() =>
-                                    dispatch(decreaseProductQuantity(item.id))
-                                }
-                            />
-                        ) : (
-                            <TouchableOpacity
-                                onPress={() =>
-                                    dispatch(addProductToBasket(item))
-                                }
-                                style={styles.addButton}
-                            >
-                                <Text style={styles.addButtonText}>
-                                    Add to basket
-                                </Text>
-                            </TouchableOpacity>
-                        )}
-                    </View>
+                    <Text numberOfLines={2} style={styles.title}>
+                        {item.title}
+                    </Text>
+                    <Text numberOfLines={1} style={styles.price}>
+                        $ {item.price}
+                    </Text>
                 </View>
             )}
         />
@@ -94,37 +125,30 @@ const styles = StyleSheet.create({
         width: '49%',
         backgroundColor: Colors.white,
         marginRight: 4,
-        borderWidth: 1,
         padding: 12,
-        borderColor: Colors.grayCartBorder,
         marginBottom: 13,
-        borderRadius: 10,
     },
     contentContainerStyle: {
         width: '100%',
-        paddingBottom: 90,
+        flexGrow: 1,
         marginTop: 12,
     },
     image: {
-        alignSelf: 'center',
-        borderRadius: 12,
+        width: '100%',
+        height: 150,
         marginBottom: 12,
     },
     title: {
-        fontWeight: '400',
-        fontSize: 14,
-        color: Colors.textBlack,
+        fontWeight: '600',
+        fontSize: 15,
+        color: Colors.button.buttonGreen,
         marginBottom: 4,
     },
-    description: {
-        fontSize: 12,
-        color: Colors.textGray,
-    },
     price: {
-        fontSize: 20,
-        fontWeight: '700',
+        fontSize: 15,
+        fontWeight: '600',
         marginRight: 8,
-        color: Colors.textBlack,
+        color: Colors.button.buttonGreen,
     },
     oldPrice: {
         fontSize: 12,
@@ -132,19 +156,9 @@ const styles = StyleSheet.create({
         textDecorationLine: 'line-through',
         color: Colors.textGray,
     },
-    // Другие стили остаются прежними
     actionsContainer: {
         marginTop: 8,
         width: '100%',
-    },
-    addButton: {
-        backgroundColor: Colors.white,
-        borderRadius: 8,
-        padding: 10,
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.1,
-        elevation: 3,
     },
     addButtonText: {
         fontSize: 12,

@@ -25,33 +25,30 @@ const CartList = () => {
                         <Image
                             source={item.product.image}
                             style={styles.image}
-                            resizeMode="cover"
+                            resizeMode="stretch"
                         />
                         <View style={styles.infoContainer}>
-                            <Text numberOfLines={2} style={styles.title}>
-                                {item.product.title}
-                            </Text>
-                            <View style={styles.detailsContainer}>
+                            <View style={{ flex: 1 }}>
+                                <Text numberOfLines={2} style={styles.title}>
+                                    {item.product.title}
+                                </Text>
                                 <Text style={styles.price}>
                                     {item.product.price} ₽
                                 </Text>
-                                <Text style={styles.weight}>
-                                    • {item.product.weight} г
-                                </Text>
                             </View>
-                        </View>
-                        <Counter
-                            width={100}
-                            quantity={item.quantity}
-                            onIncrement={() =>
+                            <Counter
+                              width={100}
+                              quantity={item.quantity}
+                              onIncrement={() =>
                                 dispatch(addProductToBasket(item.product))
-                            }
-                            onDecrement={() =>
+                              }
+                              onDecrement={() =>
                                 dispatch(
-                                    decreaseProductQuantity(item.product.id)
+                                  decreaseProductQuantity(item.product.id)
                                 )
-                            }
-                        />
+                              }
+                            />
+                        </View>
                     </View>
                 )}
             />
@@ -67,47 +64,39 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     contentContainer: {
-        paddingBottom: 90,
+        paddingBottom: 220,
         flexGrow: 1,
     },
     cartItem: {
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'space-between',
         backgroundColor: Colors.white,
         marginBottom: 16,
-        borderRadius: 8,
         width: '100%',
-        padding: 12,
     },
     image: {
-        width: 60,
-        height: 60,
+        width: 160,
+        height: 140,
         borderRadius: 8,
         marginRight: 12,
     },
     infoContainer: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'space-between',
+        width: '100%',
     },
     title: {
-        fontSize: 10,
-        fontWeight: '500',
-        color: Colors.textBlack,
+        fontSize: 15,
+        fontWeight: '600',
+        color: Colors.button.buttonGreen,
         marginBottom: 4,
     },
-    detailsContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
     price: {
-        fontSize: 12,
-        fontWeight: '700',
-        color: Colors.textBlack,
+        fontSize: 14,
+        fontWeight: '400',
+        color: Colors.button.buttonGreen,
         marginRight: 8,
-    },
-    weight: {
-        fontSize: 12,
-        color: Colors.textGray,
     },
 });
 

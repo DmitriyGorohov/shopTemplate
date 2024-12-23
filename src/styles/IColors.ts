@@ -14,6 +14,8 @@ export interface IColors extends IBaseColors {
   },
   button: {
     buttonGreen: string;
+    buttonYellow: string;
+    buttonOrange: string;
     buttonDisable: string;
     buttonError: string;
   },

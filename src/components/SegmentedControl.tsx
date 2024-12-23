@@ -1,6 +1,11 @@
 import React from 'react';
-import { type FC } from 'react';
-import {StyleSheet, Text, TouchableOpacity, useWindowDimensions, View} from 'react-native';
+import {
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    useWindowDimensions,
+    View,
+} from 'react-native';
 import Animated, {
     useAnimatedStyle,
     withTiming,
@@ -16,6 +21,7 @@ type SegmentedControlProps = {
 const SegmentedControl: React.FC<SegmentedControlProps> = React.memo(
     ({ options, selectedOption, onOptionPress }) => {
         const { width: windowWidth } = useWindowDimensions();
+        console.log(selectedOption);
 
         const internalPadding = 0;
         const segmentedControlWidth = windowWidth - 40;
@@ -26,7 +32,8 @@ const SegmentedControl: React.FC<SegmentedControlProps> = React.memo(
         const rStyle = useAnimatedStyle(() => {
             return {
                 left: withTiming(
-                    itemWidth * options.indexOf(selectedOption) + internalPadding / 2
+                    itemWidth * options.indexOf(selectedOption) +
+                        internalPadding / 2
                 ),
             };
         }, [selectedOption, options, itemWidth]);
@@ -65,7 +72,19 @@ const SegmentedControl: React.FC<SegmentedControlProps> = React.memo(
                                 styles.labelContainer,
                             ]}
                         >
-                            <Text style={styles.label}>{option}</Text>
+                            <Text
+                                style={[
+                                    styles.label,
+                                    {
+                                        color:
+                                            selectedOption === option
+                                                ? Colors.button.buttonOrange
+                                                : Colors.button.buttonYellow,
+                                    },
+                                ]}
+                            >
+                                {option}
+                            </Text>
                         </TouchableOpacity>
                     );
                 })}
@@ -78,11 +97,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         height: 36,
         width: '100%',
-        backgroundColor: Colors.gray,
+        backgroundColor: Colors.white,
     },
     activeBox: {
         position: 'absolute',
-        borderRadius: 12,
+        borderRadius: 30,
         shadowColor: 'black',
         shadowOffset: {
             width: 0,
@@ -90,13 +109,16 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.1,
         elevation: 3,
-        height: '95%',
+        height: '90%',
         top: '3%',
         backgroundColor: Colors.white,
+        borderWidth: 0.7,
+        borderColor: Colors.button.buttonOrange,
     },
     labelContainer: { justifyContent: 'center', alignItems: 'center' },
     label: {
-        fontSize: 12,
+        fontSize: 15,
+      fontWeight: '600',
     },
 });
 export default SegmentedControl;

@@ -1,13 +1,13 @@
 import React from 'react';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import {
-    CardStyleInterpolators,
     createStackNavigator,
 } from '@react-navigation/stack';
 
 import Navigation from './navigation';
 import { Stacks } from './const';
 import { MainStack } from '@src/navigation/stacks';
+import Colors from '@src/styles/Colors';
 
 const Stack = createStackNavigator();
 
@@ -18,6 +18,7 @@ const NavigatorContainerTemplate = (): React.JSX.Element => (
             ...DefaultTheme,
             colors: {
                 ...DefaultTheme.colors,
+              background: Colors.white,
             },
         }}
     >

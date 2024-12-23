@@ -1,15 +1,16 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Colors from '@src/styles/Colors';
 import { useRoute } from '@react-navigation/native';
 import { MainRouteProps } from '@src/types/stacks/MainStacksType';
+import Navigation from '@src/navigation/navigation';
 
 const EventContentScreen = (): React.JSX.Element => {
     const { params } = useRoute<MainRouteProps>();
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{params.item.title}</Text>
             <Image source={params.item.image} style={styles.image} />
+            <Text style={styles.title}>{params.item.title}</Text>
             <Text style={styles.description}>{params.item.description}</Text>
             <Text
                 style={{
@@ -20,20 +21,38 @@ const EventContentScreen = (): React.JSX.Element => {
                 Time
             </Text>
             <View style={styles.infoContainer}>
-                <Image source={require('@src/assets/img/time/Group.png')} />
+                <Text style={styles.infoTextTitle}>Time and date</Text>
                 <Text style={styles.infoText}>{params.item.time}</Text>
             </View>
-            <Text
+            <View
                 style={{
-                    fontSize: 16,
-                    color: Colors.textBlack,
+                    paddingHorizontal: 16,
+                    position: 'absolute',
+                    bottom: 40,
+                    width: '100%',
                 }}
             >
-                Date
-            </Text>
-            <View style={styles.infoContainer}>
-                <Image source={require('@src/assets/img/data/Group.png')} />
-                <Text style={styles.infoText}>{params.item.date}</Text>
+                <TouchableOpacity
+                    activeOpacity={0.8}
+                    onPress={() => Navigation.pop()}
+                    style={{
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        backgroundColor: Colors.button.buttonGreen,
+                        borderRadius: 30,
+                        paddingVertical: 12,
+                    }}
+                >
+                    <Text
+                        style={{
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: '700',
+                        }}
+                    >
+                        Back to events
+                    </Text>
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -42,7 +61,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: Colors.white,
-        paddingHorizontal: 16,
     },
     header: {
         flexDirection: 'row',
@@ -55,37 +73,37 @@ const styles = StyleSheet.create({
         marginLeft: 8,
     },
     title: {
+        paddingLeft: 16,
         paddingTop: 20,
-        fontSize: 22,
-        fontWeight: 'bold',
-        color: Colors.textBlack,
-        marginBottom: 16,
+        fontSize: 20,
+        fontWeight: '600',
+        color: Colors.button.buttonGreen,
+        marginBottom: 8,
     },
     image: {
         width: '100%',
-        height: 200,
-        borderRadius: 12,
+        height: 300,
         marginBottom: 16,
     },
     description: {
-        fontSize: 16,
-        color: '#666666',
+        paddingLeft: 16,
+        fontSize: 20,
+        fontWeight: '200',
+        color: Colors.button.buttonYellow,
         marginBottom: 24,
     },
     infoContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 16,
-        padding: 12,
-        backgroundColor: Colors.white,
-        borderWidth: 1,
-        borderColor: Colors.input.borderColor,
-        borderRadius: 8,
+        paddingHorizontal: 16,
+    },
+    infoTextTitle: {
+        fontSize: 20,
+        fontWeight: '600',
+        color: Colors.button.buttonGreen,
     },
     infoText: {
-        fontSize: 16,
-        color: '#333333',
-        marginLeft: 8,
+        fontSize: 15,
+        fontWeight: '300',
+        color: Colors.button.buttonYellow,
     },
 });
 export default EventContentScreen;

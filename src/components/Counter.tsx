@@ -6,6 +6,7 @@ import {
     StyleSheet,
 } from 'react-native';
 import Colors from '@src/styles/Colors';
+import NumberFlow from 'rn-number-flow';
 
 interface CounterProps {
     quantity: number;
@@ -20,7 +21,7 @@ const Counter: React.FC<CounterProps> = ({ quantity, onIncrement, width, onDecre
             <TouchableOpacity onPress={onDecrement} style={[styles.counterButton, { alignItems: 'flex-start' }]}>
                 <Text style={styles.counterText}>-</Text>
             </TouchableOpacity>
-            <Text style={styles.counterText}>{quantity}</Text>
+            <NumberFlow style={styles.counterText} value={quantity.toString()} />
             <TouchableOpacity onPress={onIncrement} style={[styles.counterButton, { alignItems: 'flex-end' }]}>
                 <Text style={styles.counterTextRight}>+</Text>
             </TouchableOpacity>
@@ -33,11 +34,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: Colors.gray,
-        borderRadius: 8,
-        padding: 10,
-        borderWidth: 0.5,
-        borderColor: Colors.gray,
+        backgroundColor: Colors.button.buttonGreen,
+        borderRadius: 30,
+        paddingVertical: 4,
+        paddingHorizontal: 10,
+        // borderWidth: 0.5,
+        // borderColor: Colors.gray,
     },
     counterButton: {
         justifyContent: 'center',
@@ -45,23 +47,19 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     counterText: {
-        fontSize: 12,
+        fontSize: 15,
         fontWeight: '700',
         color: Colors.textBlack,
     },
     counterTextRight: {
-        fontSize: 12,
+        fontSize: 15,
         fontWeight: '700',
-        color: Colors.button.buttonGreen,
+        color: Colors.textBlack,
     },
     addButton: {
         backgroundColor: Colors.white,
         borderRadius: 8,
         padding: 10,
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.1,
-        elevation: 3,
     },
     addButtonText: {
         fontSize: 12,
