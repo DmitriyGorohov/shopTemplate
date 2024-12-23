@@ -70,7 +70,7 @@ const BonusesScreen = (): React.JSX.Element => {
                     <View style={{
                         flexDirection: 'row',
                         flexWrap: 'wrap',
-                        width: Dimensions.get('window').width * 0.9,
+                        // width: Dimensions.get('window').width * 0.9,
                         alignItems: 'center',
                         justifyContent: 'center',
                     }}>
@@ -90,12 +90,13 @@ const BonusesScreen = (): React.JSX.Element => {
                               {index === 0 && (
                                 <Image
                                   source={require('@src/assets/img-yellow/cap/cap.png')}
-                                  resizeMode={'cover'}
+                                  resizeMode={'contain'}
                                   style={{
                                       position: 'absolute',
-                                      top: -70,
-                                      left: -27,
+                                      top: -80,
+                                      left: -25,
                                       zIndex: 999,
+                                      width: Dimensions.get('window').width * 0.27,
                                   }}
                                 />
                               )}
