@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
+    Dimensions,
     Image,
     StyleSheet,
     Text,
@@ -66,67 +67,61 @@ const BonusesScreen = (): React.JSX.Element => {
 
             <View style={styles.container}>
                 <View style={styles.cardsContainer}>
-                    <Image
-                        source={require('@src/assets/img-yellow/cap/cap.png')}
-                        resizeMode={'cover'}
-                        style={{
-                            position: 'absolute',
-                            top: -70,
-                            left: 10,
-                            zIndex: 999,
-                        }}
-                    />
-                    <Image
-                        source={require('@src/assets/img-yellow/right-eclipse/right-eclipse.png')}
-                        resizeMode={'cover'}
-                        style={{
-                            position: 'absolute',
-                            bottom: 65,
-                            right: 45,
-                        }}
-                    />
-                    <Image
-                        source={require('@src/assets/img-yellow/left-eclipse/left-eclipse.png')}
-                        resizeMode={'cover'}
-                        style={{
-                            position: 'absolute',
-                            bottom: 65,
-                            right: 65,
-                        }}
-                    />
-                    {cards.map((value, index) => (
-                        <TouchableOpacity
+                    <View style={{
+                        flexDirection: 'row',
+                        flexWrap: 'wrap',
+                        width: Dimensions.get('window').width * 0.9,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}>
+                        {cards.map((value, index) => (
+                          <TouchableOpacity
                             key={index}
                             activeOpacity={1}
                             style={styles.card}
                             onPress={() => {
                                 if (index + 1 !== 8) {
-                                    handleCardPress(index);
+                                    if (value !== '1111') {
+                                        handleCardPress(index);
+                                    }
                                 }
                             }}
-                        >
-                            {value === '1111' ? (
+                          >
+                              {index === 0 && (
                                 <Image
-                                    source={require('@src/assets/img-yellow/check/check.png')}
-                                    resizeMode="cover"
-                                    style={{
-                                        width: 40,
-                                        height: 40,
-                                    }}
+                                  source={require('@src/assets/img-yellow/cap/cap.png')}
+                                  resizeMode={'cover'}
+                                  style={{
+                                      position: 'absolute',
+                                      top: -70,
+                                      left: -27,
+                                      zIndex: 999,
+                                  }}
                                 />
-                            ) : (
+                              )}
+                              {value === '1111' ? (
+                                <Image
+                                  source={require('@src/assets/img-yellow/check/check.png')}
+                                  resizeMode="cover"
+                                  style={{
+                                      width: 40,
+                                      height: 40,
+                                  }}
+                                />
+                              ) : (
                                 <Text
-                                    style={{
-                                        fontSize: index + 1 === 8 ? 10 : 40,
-                                        textAlign: 'center',
-                                        fontWeight: '600',
-                                    }}
+                                  style={{
+                                      fontSize: index + 1 === 8 ? 10 : 40,
+                                      textAlign: 'center',
+                                      fontWeight: '600',
+                                  }}
                                 >
                                     {index + 1 === 8 ? 'FREE\nDISH' : index + 1}
                                 </Text>
-                            )}
-                        </TouchableOpacity>
-                    ))}
+                              )}
+                          </TouchableOpacity>
+                        ))}
+                    </View>
                 </View>
                 <View
                     style={{
@@ -238,8 +233,6 @@ const BonusesScreen = (): React.JSX.Element => {
                                     </Text>
                                 </TouchableOpacity>
                             </View>
-                            {/*<Button title="Сохранить" onPress={handleSave} />*/}
-                            {/*<Button title="Отменить" onPress={} />*/}
                         </View>
                     </View>
                 </Modal>
@@ -298,9 +291,9 @@ const styles = StyleSheet.create({
         marginBottom: 24,
     },
     card: {
-        width: 65,
+        width: Dimensions.get('window').width * 0.16,
         height: 65,
-        backgroundColor: '#FFD700',
+        backgroundColor: Colors.button.buttonGreen,
         justifyContent: 'center',
         alignItems: 'center',
         margin: 10,
