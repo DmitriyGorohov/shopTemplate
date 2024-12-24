@@ -14,12 +14,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Navigation from '@src/navigation/navigation';
 
 const BonusesScreen = (): React.JSX.Element => {
-    const [cards, setCards] = useState<string[]>(Array(8).fill(''));
+    const initialCards = Array(8).fill('');
+    const [cards, setCards] = useState<string[]>(initialCards);
     const [modalVisible, setModalVisible] = useState(false);
     const [isError, setIsError] = useState(false);
     const [selectedCard, setSelectedCard] = useState<number | null>(null);
     const [inputValue, setInputValue] = useState('');
-
+    const allAre = cards.slice(0, 7).every((element) => element === '1111');
     // Загрузка состояния из AsyncStorage при запуске
     useEffect(() => {
         const loadCards = async () => {
@@ -35,6 +36,12 @@ const BonusesScreen = (): React.JSX.Element => {
     const saveCards = async (newCards: string[]) => {
         await AsyncStorage.setItem('cards', JSON.stringify(newCards));
         setCards(newCards);
+    };
+
+    // Очистка AsyncStorage и сброс состояния
+    const resetCards = async () => {
+        await AsyncStorage.removeItem('cards');
+        setCards(initialCards); // Сброс к первоначальному состоянию
     };
 
     // Открытие модалки
@@ -67,60 +74,66 @@ const BonusesScreen = (): React.JSX.Element => {
 
             <View style={styles.container}>
                 <View style={styles.cardsContainer}>
-                    <View style={{
-                        flexDirection: 'row',
-                        flexWrap: 'wrap',
-                        // width: Dimensions.get('window').width * 0.9,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                    }}>
+                    <View
+                        style={{
+                            flexDirection: 'row',
+                            flexWrap: 'wrap',
+                            // width: Dimensions.get('window').width * 0.9,
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                        }}
+                    >
                         {cards.map((value, index) => (
-                          <TouchableOpacity
-                            key={index}
-                            activeOpacity={1}
-                            style={styles.card}
-                            onPress={() => {
-                                if (index + 1 !== 8) {
-                                    if (value !== '1111') {
-                                        handleCardPress(index);
+                            <TouchableOpacity
+                                key={index}
+                                activeOpacity={1}
+                                style={styles.card}
+                                onPress={() => {
+                                    if (index + 1 !== 8) {
+                                        if (value !== '1111') {
+                                            handleCardPress(index);
+                                        }
                                     }
-                                }
-                            }}
-                          >
-                              {index === 0 && (
-                                <Image
-                                  source={require('@src/assets/img-yellow/cap/cap.png')}
-                                  resizeMode={'contain'}
-                                  style={{
-                                      position: 'absolute',
-                                      top: -80,
-                                      left: -25,
-                                      zIndex: 999,
-                                      width: Dimensions.get('window').width * 0.27,
-                                  }}
-                                />
-                              )}
-                              {value === '1111' ? (
-                                <Image
-                                  source={require('@src/assets/img-yellow/check/check.png')}
-                                  resizeMode="cover"
-                                  style={{
-                                      width: 40,
-                                      height: 40,
-                                  }}
-                                />
-                              ) : (
-                                <Text
-                                  style={{
-                                      fontSize: index + 1 === 8 ? 10 : 40,
-                                      textAlign: 'center',
-                                      fontWeight: '600',
-                                  }}
-                                >
-                                    {index + 1 === 8 ? 'FREE\nDISH' : index + 1}
-                                </Text>
-                              )}
-                          </TouchableOpacity>
+                                }}
+                            >
+                                {index === 0 && (
+                                    <Image
+                                        source={require('@src/assets/img-yellow/cap/cap.png')}
+                                        resizeMode={'contain'}
+                                        style={{
+                                            position: 'absolute',
+                                            top: -80,
+                                            left: -25,
+                                            zIndex: 999,
+                                            width:
+                                                Dimensions.get('window').width *
+                                                0.27,
+                                        }}
+                                    />
+                                )}
+                                {value === '1111' ? (
+                                    <Image
+                                        source={require('@src/assets/img-yellow/check/check.png')}
+                                        resizeMode="cover"
+                                        style={{
+                                            width: 40,
+                                            height: 40,
+                                        }}
+                                    />
+                                ) : (
+                                    <Text
+                                        style={{
+                                            fontSize: index + 1 === 8 ? 10 : 40,
+                                            textAlign: 'center',
+                                            fontWeight: '600',
+                                        }}
+                                    >
+                                        {index + 1 === 8
+                                            ? 'FREE\nDISH'
+                                            : index + 1}
+                                    </Text>
+                                )}
+                            </TouchableOpacity>
                         ))}
                     </View>
                 </View>
@@ -145,7 +158,7 @@ const BonusesScreen = (): React.JSX.Element => {
                 <Modal isVisible={modalVisible}>
                     <View style={styles.modalContainer}>
                         <View style={styles.modalContent}>
-                            <Text style={styles.modalTitle}>Введите код</Text>
+                            <Text style={styles.modalTitle}>Enter code</Text>
                             <TextInput
                                 placeholderTextColor={Colors.textBlack}
                                 style={[
@@ -161,7 +174,7 @@ const BonusesScreen = (): React.JSX.Element => {
                                     setIsError(false);
                                     setInputValue(text);
                                 }}
-                                placeholder="Введите код"
+                                placeholder="Enter code"
                                 keyboardType="number-pad"
                             />
                             {isError && (
@@ -173,7 +186,7 @@ const BonusesScreen = (): React.JSX.Element => {
                                         marginBottom: 12,
                                     }}
                                 >
-                                    Код не верный
+                                    The code is not correct
                                 </Text>
                             )}
                             <View
@@ -203,7 +216,7 @@ const BonusesScreen = (): React.JSX.Element => {
                                             color: Colors.textBlack,
                                         }}
                                     >
-                                        Сохранить
+                                        Save
                                     </Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity
@@ -230,7 +243,7 @@ const BonusesScreen = (): React.JSX.Element => {
                                             fontWeight: '400',
                                         }}
                                     >
-                                        Отменить
+                                        Cancel
                                     </Text>
                                 </TouchableOpacity>
                             </View>
@@ -247,7 +260,13 @@ const BonusesScreen = (): React.JSX.Element => {
                 >
                     <TouchableOpacity
                         activeOpacity={0.8}
-                        onPress={() => Navigation.pop()}
+                        onPress={() => {
+                            if (!allAre) {
+                                Navigation.pop();
+                            } else {
+                                resetCards();
+                            }
+                        }}
                         style={{
                             alignItems: 'center',
                             justifyContent: 'center',
@@ -263,7 +282,7 @@ const BonusesScreen = (): React.JSX.Element => {
                                 fontWeight: '700',
                             }}
                         >
-                            Back to menu
+                            {allAre ? 'Reset' : 'Back to menu'}
                         </Text>
                     </TouchableOpacity>
                 </View>

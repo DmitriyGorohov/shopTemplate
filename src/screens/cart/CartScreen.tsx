@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { shopSelector } from '@src/store/shop/shopSlice';
 import Navigation from '@src/navigation/navigation';
 import CartList from '@src/components/CartList';
+import { Screens } from '@src/navigation/const';
 
 const CartScreen = (): React.JSX.Element => {
     const { totalCount, itemBasket } = useSelector(shopSelector);
@@ -118,7 +119,7 @@ const CartScreen = (): React.JSX.Element => {
                     <TouchableOpacity
                         activeOpacity={0.7}
                         onPress={() => {
-                            Navigation.pop();
+                            Navigation.navigate(Screens.CART_SUCCESS);
                         }}
                         style={[
                             styles.cartButton,
@@ -130,7 +131,7 @@ const CartScreen = (): React.JSX.Element => {
                         <Text
                             style={[styles.cartText, { textAlign: 'center' }]}
                         >
-                            Add products
+                            Order
                         </Text>
                     </TouchableOpacity>
                 </View>

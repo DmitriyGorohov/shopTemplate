@@ -9,6 +9,8 @@ const ReservationScreen = (): React.JSX.Element => {
     const [firstName, setFirstName] = React.useState('');
     const [phoneNumber, setPhoneNumber] = React.useState('');
     const [tableName, setTableName] = React.useState('');
+    const [time, setTime] = React.useState('');
+    const [date, setDate] = React.useState('');
 
     return (
         <View style={styles.container}>
@@ -63,8 +65,8 @@ const ReservationScreen = (): React.JSX.Element => {
                                 style={styles.input}
                                 placeholderTextColor={Colors.textBlack}
                                 placeholder={'HH.MM'}
-                                value={tableName}
-                                onChangeText={setTableName}
+                                value={time}
+                                onChangeText={setTime}
                             />
                         </View>
                         <View style={[styles.form, { flex: 1 }]}>
@@ -73,8 +75,8 @@ const ReservationScreen = (): React.JSX.Element => {
                                 style={styles.input}
                                 placeholderTextColor={Colors.textBlack}
                                 placeholder={'DD.MM.YY'}
-                                value={tableName}
-                                onChangeText={setTableName}
+                                value={date}
+                                onChangeText={setDate}
                             />
                         </View>
                     </View>
