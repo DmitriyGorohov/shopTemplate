@@ -33,7 +33,6 @@ const AnimatedTouchableOpacity =
 const ShopScreen = (): React.JSX.Element => {
     const { totalCount } = useSelector(shopSelector);
     const [selectedOption, setSelectedOption] = useState('All');
-    console.log(totalCount);
 
     const getProducts = (): Product[] => {
         switch (selectedOption) {
